@@ -28,15 +28,16 @@ public class main{
 			for(int i = 0; i < numLines; ++i){
 				line = br.readLine();
 				String[] result = line.split("\\|");
-				for (int j = 0; j < 4; ++j){
-					System.out.println(result[j]);
-				}
+//				for (int j = 0; j < 4; ++j){
+//					System.out.println(result[j]);
+//				}
 
 				String src = result[0];
 				String dst = result[1];
 				int cost = Integer.parseInt(result[2]);
 				int time = Integer.parseInt(result[3]);
 				flightMap.addFlight(src, dst, cost, time);
+				flightMap.addFlight(dst, src, cost, time);
 
 			}
 		}catch(IOException e){
@@ -61,9 +62,9 @@ public class main{
 			for(int i = 0; i < numLines; ++i){
 				line = br.readLine();
 				String[] result = line.split("\\|");
-				for (int j = 0; j < 3; ++j){
-					System.out.println(result[j]);
-				}
+	//			for (int j = 0; j < 3; ++j){
+	//				System.out.println(result[j]);
+	//			}
 
 				String src = result[0];
 				String dst = result[1];
