@@ -5,6 +5,7 @@ import java.util.Iterator;
 public class FlightMap{
 	private LinkedList <SourceNode> flights;
 	private boolean filterFlag;
+	private String[] namesArray;
 
 	public FlightMap(){
 		flights = new LinkedList<SourceNode>();
@@ -21,7 +22,7 @@ public class FlightMap{
 		flights.get(flights.indexOf(newNode )).addDestNode(new DestNode(dst,cost,time));
 		return;
 	}
-
+	
 	public int[][] toIntArray(){
 		int dimension = flights.size();
 		int[][] adjMatrix = new int[dimension][dimension] ;
@@ -33,6 +34,7 @@ public class FlightMap{
 			names[i] = nameIterator.next().getName();
 			++i;
 		}
+		namesArray = names.clone();
 		i = 0;
 		while (listIterator.hasNext()){
 			SourceNode temp = listIterator.next();
@@ -41,15 +43,35 @@ public class FlightMap{
 			}
 			i++;
 		}
+		/*
 		for (int a = 0; a < dimension; a++){
 			for (int b = 0; b < dimension; b++){
 				System.out.print(adjMatrix[a][b]+ "|");
 			}
 			System.out.println();
 		}
+		*/
 		return adjMatrix;
 	}
 
+	public int getSize(){
+		return flights.size();
+	}
+
+	public int getIntValue(String name){
+		
+		for(int i = 0; i < namesArray.length-1; i++)
+		{
+			if (name.equals(namesArray[i])){
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	public String[] getNames(){
+		return namesArray;
+	}
 	//public void setFilter(boolean filter){
 	//	this.filterFlag = filter;
 	//}
