@@ -38,8 +38,8 @@ public class main{
 				int time = Integer.parseInt(result[3]);
 				flightMap.addFlight(src, dst, cost, time);
 				flightMap.addFlight(dst, src, cost, time);
-
 			}
+			flightMap.toIntArray();
 		}catch(IOException e){
 		}
 	}
@@ -69,6 +69,7 @@ public class main{
 				String src = result[0];
 				String dst = result[1];
 				Boolean sortByTime = result[2].equalsIgnoreCase("T");
+				//flightMap.setFilter(sortByTime);
 
 				// FlightMap.add(
 			}

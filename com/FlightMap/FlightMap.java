@@ -1,13 +1,15 @@
 package com.FlightMap;
 import java.util.LinkedList;
+import java.util.Iterator;
 
 public class FlightMap{
 	private LinkedList <SourceNode> flights;
-	
+	private boolean filterFlag;
+
 	public FlightMap(){
 		flights = new LinkedList<SourceNode>();
 	}
-	
+
 	public void addFlight(String src, String dst, int cost, int time){
 		SourceNode newNode = new SourceNode(src);
 		boolean inside = flights.contains(newNode);
@@ -16,7 +18,39 @@ public class FlightMap{
 			flights.add(newNode);
 		}
 		// This is where -1 came from 
-		// System.out.println(flights.indexOf(new SourceNode(src)));
+		flights.get(flights.indexOf(newNode )).addDestNode(new DestNode(dst,cost,time));
 		return;
 	}
+
+	public int[][] toIntArray(){
+		int dimension = flights.size();
+		int[][] adjMatrix = new int[dimension][dimension] ;
+		Iterator<SourceNode> listIterator = flights.listIterator();
+		Iterator<SourceNode> nameIterator = flights.listIterator();
+		int i = 0;
+		String[] names = new String[dimension];
+		while (nameIterator.hasNext()){
+			names[i] = nameIterator.next().getName();
+			++i;
+		}
+		i = 0;
+		while (listIterator.hasNext()){
+			SourceNode temp = listIterator.next();
+			for (int j = 0; j < dimension; j++){
+					adjMatrix[i][j] = temp.getCostOfDestination(names[j]);
+			}
+			i++;
+		}
+		for (int a = 0; a < dimension; a++){
+			for (int b = 0; b < dimension; b++){
+				System.out.print(adjMatrix[a][b]+ "|");
+			}
+			System.out.println();
+		}
+		return adjMatrix;
+	}
+
+	//public void setFilter(boolean filter){
+	//	this.filterFlag = filter;
+	//}
 }
